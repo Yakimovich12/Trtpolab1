@@ -33,7 +33,6 @@ package demo.parallel;
 
 import java.util.List;
 import java.util.Locale;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.beans.binding.StringBinding;

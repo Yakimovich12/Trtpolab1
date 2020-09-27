@@ -33,8 +33,6 @@ package demo.parallel;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
-
-import demo.demo.parallel;
 import javafx.concurrent.Task;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;
@@ -277,7 +275,7 @@ class MandelbrotSetTask extends Task<Long> {
         int count = 0;
         Complex c = new Complex(0, 0);
         do {
-            c = c.times(c).plus(comp);
+            c = c.times(c).times(c).sub(comp).times(c).div(comp).plus(comp);
             count++;
         } while (count < CAL_MAX_COUNT && c.lengthSQ() < LENGTH_BOUNDARY);
         return count;
@@ -285,7 +283,7 @@ class MandelbrotSetTask extends Task<Long> {
 
     /**
      * Calculates a color of a given pixel on the image using 
-     * {@link #calc(demo.demo.parallel.Complex) } method.
+     * {@link #calc(demo.parallel.Complex) } method.
      * @param x x coordinate of the pixel in the image
      * @param y y coordinate of the pixel in the image
      * @return calculated color of the pixel
@@ -332,12 +330,12 @@ class MandelbrotSetTask extends Task<Long> {
     /**
      * Returns a color for a given iteration count.
      * @param count number of iterations return by 
-     * {@link #calc(demo.demo.parallel.Complex)} method
+     * {@link #calc(demo.parallel.Complex)} method
      * @return color from pre-calculated table
      */
     private Color getColor(int count) {
         if (count >= colors.length) {
-            return Color.WHITE;//Black
+            return Color.WHITE;
         }
         return colors[count];
     }
@@ -355,10 +353,10 @@ class MandelbrotSetTask extends Task<Long> {
         Color[] cc = {
             Color.rgb(40, 0, 0),
             Color.BLUE,
-            Color.WHITE,
+            Color.BLACK,
             Color.BLUE,
             Color.rgb(100, 0, 0),
-            Color.BLUE,
+            Color.BLACK,
             Color.rgb(50, 0, 0)
         };
         
